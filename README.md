@@ -39,6 +39,17 @@ FROM (
   GROUP BY id_user
   HAVING COUNT(id_friends) > 5;
 ```
+или, что более правильно с использованием JOIN:
+```sql
+SELECT id_user, COUNT(id_friends)
+FROM (
+	SELECT id AS id_user,id_friend_one AS id_friends FROM friends JOIN users ON id_friend_two = id
+	UNION
+	SELECT id AS id_user,id_friend_two AS id_friends FROM friends JOIN users ON id_friend_one = id
+  ) t
+  GROUP BY id_user
+  HAVING COUNT(id_friends) > 5;
+```
 
 #### Задание 1.2. 
 
